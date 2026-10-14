@@ -1,0 +1,245 @@
+/* ---------------------------------------------------------------------------
+   Pre-join (green room)
+   --------------------------------------------------------------------------- */
+
+.prejoin {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+.prejoin-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  padding: 16px 48px 48px;
+  overflow-y: auto;
+}
+
+.prejoin-preview {
+  flex: 1;
+  max-width: 740px;
+  min-width: 0;
+}
+
+.prejoin-video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-md);
+  background: var(--stage-bg);
+  overflow: hidden;
+  box-shadow: var(--shadow-1);
+}
+
+.prejoin-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+.prejoin-video .video-off-note {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e8eaed;
+  font-size: 20px;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.prejoin-name-tag {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  color: #fff;
+  font-size: 14px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+  z-index: 2;
+  /* A 60-character name would otherwise run off the preview. */
+  max-width: calc(100% - 32px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* A dark scrim pill keeps the controls legible over bright video. */
+.prejoin-video-controls {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  width: fit-content;
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  z-index: 2;
+  padding: 6px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(32, 33, 36, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Inside the pill the buttons need no fill of their own. */
+.prejoin-video-controls .round-ctl {
+  background: transparent;
+  border-color: transparent;
+}
+
+.prejoin-video-controls .round-ctl:hover:not(.off):not(.active) {
+  background: var(--stage-control-hover);
+}
+
+.prejoin-devices {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.prejoin-devices .select-field {
+  flex: 1;
+}
+
+.prejoin-side {
+  width: 380px;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+}
+
+.prejoin-side h1 {
+  font-size: 26px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.prejoin-side .prejoin-sub {
+  color: var(--text-secondary);
+  margin: 0 0 8px;
+  overflow-wrap: anywhere;
+}
+
+.prejoin-side .text-field {
+  width: 100%;
+}
+
+.prejoin-side .btn {
+  margin-top: 10px;
+  min-width: 200px;
+}
+
+.prejoin-error {
+  /* 13px text: the danger fill's hue is 3.9:1 on white, and this is the one
+     line a failed join depends on. */
+  color: var(--danger-text);
+  font-size: 13px;
+  min-height: 18px;
+  margin: 0;
+}
+
+.prejoin-back {
+  margin-top: 4px;
+}
+
+/* "Try again" and "Stop waiting" side by side while the lobby waits. */
+.prejoin-wait-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 4px;
+}
+
+.prejoin-side .prejoin-wait-actions .btn {
+  min-width: 0;
+  margin-top: 4px;
+}
+
+/* Round control used on video overlays (prejoin + meeting) */
+
+.round-ctl {
+  width: var(--control-size);
+  height: var(--control-size);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: var(--stage-control);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+  flex: none;
+  position: relative;
+}
+
+.round-ctl:hover {
+  background: var(--stage-control-hover);
+}
+
+.round-ctl svg {
+  width: 22px;
+  height: 22px;
+}
+
+.round-ctl.off {
+  background: var(--danger);
+  border-color: transparent;
+}
+
+.round-ctl.off:hover {
+  background: var(--danger-hover);
+}
+
+.round-ctl.active {
+  background: var(--stage-accent);
+  border-color: transparent;
+  color: var(--stage-accent-ink);
+}
+
+.round-ctl:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* Short viewports: top-align so overflowing content stays scrollable
+   instead of being clipped above the fold. */
+@media (max-height: 700px) {
+  .prejoin-main {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 900px) {
+  .prejoin-main {
+    flex-direction: column;
+    gap: 24px;
+    padding: 12px 20px 32px;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .prejoin-preview {
+    width: 100%;
+    max-width: 640px;
+  }
+
+  .prejoin-side {
+    width: 100%;
+    max-width: 480px;
+  }
+}
+
+@media (max-width: 520px) {
+  .prejoin-devices {
+    flex-direction: column;
+  }
+}

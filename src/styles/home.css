@@ -1,0 +1,402 @@
+/* ---------------------------------------------------------------------------
+   Home screen
+   --------------------------------------------------------------------------- */
+
+.home {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* A faint dot grid under a soft glow of the brand colour, behind the
+     header too so the page reads as one surface. */
+  background:
+    radial-gradient(900px 480px at 50% 28%, var(--accent-soft), transparent 70%),
+    radial-gradient(circle, var(--home-dot) 1px, transparent 1.5px) 0 0 / 22px 22px,
+    var(--bg);
+}
+
+.home-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 32px;
+  flex: none;
+}
+
+.home-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  color: var(--text-secondary);
+  user-select: none;
+}
+
+.home-brand img {
+  width: 32px;
+  height: 32px;
+}
+
+.home-brand b {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.home-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.home-clock {
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+.home-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.home-signin {
+  height: 38px;
+  padding: 0 18px;
+}
+
+.home-user .avatar {
+  width: 34px;
+  height: 34px;
+  font-size: 15px;
+  overflow: hidden;
+}
+
+.home-user .avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-user .avatar.is-loading {
+  background: linear-gradient(90deg, var(--surface-3) 25%, var(--surface-2) 50%, var(--surface-3) 75%);
+  background-size: 200% 100%;
+  animation: avatar-shimmer 1.4s linear infinite;
+}
+
+@keyframes avatar-shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+.home-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(48px, 7vw, 96px);
+  padding: 24px 48px 64px;
+  overflow-y: auto;
+}
+
+.home {
+  --home-dot: rgba(9, 14, 46, 0.07);
+}
+
+:root[data-theme='dark'] .home {
+  --home-dot: rgba(255, 255, 255, 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .home {
+    --home-dot: rgba(255, 255, 255, 0.06);
+  }
+}
+
+.home-hero {
+  max-width: 540px;
+  min-width: 0;
+  animation: home-rise var(--dur-slow) var(--ease) both;
+}
+
+.home-hero h1 {
+  font-size: clamp(34px, 4.4vw, 54px);
+  font-weight: 650;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  margin: 0 0 20px;
+  text-wrap: balance;
+}
+
+.home-hero-accent {
+  color: var(--accent);
+}
+
+.home-lede {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin: 0 0 36px;
+  max-width: 480px;
+  text-wrap: pretty;
+}
+
+.home-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.home-actions .btn-primary {
+  height: 52px;
+  padding: 0 24px 0 20px;
+  box-shadow: 0 1px 2px rgba(0, 16, 215, 0.2), 0 6px 16px -4px rgba(0, 16, 215, 0.35);
+}
+
+.home-actions .btn-primary:hover {
+  box-shadow: 0 1px 2px rgba(0, 16, 215, 0.25), 0 10px 24px -6px rgba(0, 16, 215, 0.45);
+}
+
+.home-relay-hint {
+  margin-top: 14px;
+}
+
+.home-relay-btn {
+  height: 42px;
+  padding: 0 18px;
+  font-size: 13.5px;
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  gap: 8px;
+  color: var(--text-secondary);
+  border-color: var(--border);
+  background: var(--surface);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.home-relay-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--surface-2);
+  transform: translateY(-1px);
+}
+
+/* Anchor for the New meeting dropdown. */
+.home-new {
+  position: relative;
+}
+
+.home-new-menu {
+  top: calc(100% + 8px);
+  left: 0;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  padding: 6px;
+}
+
+.home-new-menu .menu-item {
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.home-link-note {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 440px;
+}
+
+/* Code field with its Join button tucked inside, as one pill. */
+.home-join {
+  flex: 1;
+  min-width: 260px;
+  max-width: 360px;
+}
+
+.home-join .text-field {
+  height: 52px;
+  padding: 0 6px 0 18px;
+  border-radius: var(--radius-pill);
+  border-color: var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+
+.home-join .text-field:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.home-join-btn {
+  height: 40px;
+  padding: 0 18px;
+  font-size: 14px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.home-join-btn:hover {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+.home-join-btn:disabled {
+  background: transparent;
+  color: var(--text-tertiary);
+  opacity: 1;
+}
+
+.home-features {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  margin: 40px 0 0;
+  padding: 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.home-features li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.home-features svg {
+  width: 16px;
+  height: 16px;
+  padding: 2px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  flex: none;
+  box-sizing: content-box;
+}
+
+/* On the open web the hero is the whole page: centre it. */
+.home-hero:only-child {
+  max-width: 720px;
+  /* Centred vertically by auto margins rather than the parent's alignment,
+     so a hero taller than the viewport still scrolls from its top. */
+  margin-block: auto;
+  text-align: center;
+}
+
+.home-hero:only-child h1 {
+  font-size: clamp(36px, 5.4vw, 64px);
+}
+
+.home-hero:only-child .home-lede {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home-hero:only-child .home-actions,
+.home-hero:only-child .home-features {
+  justify-content: center;
+}
+
+.home-hero .home-art-hint {
+  margin: 28px 0 0;
+  max-width: none;
+}
+
+.home-hero:only-child .home-art-hint {
+  justify-content: center;
+}
+
+@keyframes home-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+/* Short viewports: centering would clip the top of overflowing content
+   and make it unreachable — pin to the top and let it scroll instead. */
+@media (max-height: 640px) {
+  .home-main {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 900px) {
+  .home-main {
+    flex-direction: column;
+    gap: 40px;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 32px 24px 48px;
+  }
+
+  .home-hero {
+    text-align: center;
+  }
+
+  .home-lede {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .home-actions,
+  .home-features {
+    justify-content: center;
+  }
+
+
+}
+
+@media (max-width: 520px) {
+  .home-header {
+    padding: 10px 12px 10px 16px;
+    gap: 8px;
+  }
+
+  .home-header-actions {
+    gap: 0;
+  }
+
+  .home-brand {
+    gap: 8px;
+    font-size: 18px;
+  }
+
+  .home-brand img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .home-signin {
+    padding: 0 14px;
+    margin-left: 4px;
+  }
+
+  .home-clock {
+    display: none;
+  }
+
+  .home-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .home-join {
+    max-width: none;
+    min-width: 0;
+  }
+
+  .home-actions .btn-primary {
+    width: 100%;
+  }
+
+  .home-features {
+    flex-direction: column;
+    align-items: center;
+  }
+}

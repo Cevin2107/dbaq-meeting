@@ -1,0 +1,520 @@
+/* ---------------------------------------------------------------------------
+   Puter Meet — design tokens & base styles
+   --------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+
+  /* Brand — Puter blue #0010d7 */
+  --brand: #0010d7;
+  --accent: #0010d7;
+  --accent-hover: #2733e6;
+  --accent-soft: rgba(0, 16, 215, 0.08);
+  --accent-contrast: #ffffff;
+  --danger: #ea4335;
+  --danger-hover: #d33427;
+  --danger-soft: rgba(234, 67, 53, 0.12);
+  /* Small text on a --danger fill, and danger-coloured text on --bg: the
+     fill's own hue is too light for 10–13px text in either theme. */
+  --danger-contrast: #ffffff;
+  --danger-text: #c5221f;
+  --success: #34a853;
+  --warning: #f9ab00;
+
+  /* Accent tints for the (always dark) call stage */
+  --stage-accent: #aab4ff;
+  --stage-accent-ink: #000a52;
+
+  /* Surfaces */
+  --bg: #ffffff;
+  --bg-subtle: #f6f8fc;
+  --surface: #ffffff;
+  --surface-2: #f1f3f4;
+  --surface-3: #e8eaed;
+  --surface-raised: #ffffff;
+  --backdrop: rgba(32, 33, 36, 0.5);
+
+  /* Meeting stage (call screen) */
+  --stage-bg: #202124;
+  --stage-tile: #3c4043;
+  --stage-text: #e8eaed;
+  --stage-muted: #9aa0a6;
+  --stage-control: rgba(255, 255, 255, 0.1);
+  --stage-control-hover: rgba(255, 255, 255, 0.18);
+  --stage-border: rgba(255, 255, 255, 0.12);
+
+  /* Text */
+  --text: #202124;
+  --text-secondary: #5f6368;
+  --text-tertiary: #80868b;
+
+  /* Lines & shadows */
+  --border: #dadce0;
+  --border-strong: #bdc1c6;
+  --shadow-1: 0 1px 2px rgba(9, 14, 46, 0.1), 0 2px 8px rgba(9, 14, 46, 0.08);
+  --shadow-2: 0 2px 6px rgba(9, 14, 46, 0.12), 0 8px 24px rgba(9, 14, 46, 0.12);
+  --shadow-3: 0 4px 12px rgba(9, 14, 46, 0.14), 0 16px 48px rgba(9, 14, 46, 0.18);
+
+  /* Geometry */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+  --control-size: 48px;
+  --panel-width: 360px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --dur-fast: 120ms;
+  --dur: 200ms;
+  --dur-slow: 320ms;
+
+  --font: 'Inter Variable', 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', sans-serif;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --accent: #aab4ff;
+  --accent-hover: #c3caff;
+  --accent-soft: rgba(170, 180, 255, 0.15);
+  --accent-contrast: #000a52;
+  --danger: #f28b82;
+  --danger-hover: #f6aea9;
+  --danger-soft: rgba(242, 139, 130, 0.15);
+  --danger-contrast: #202124;
+  --danger-text: #f28b82;
+  --success: #81c995;
+  --warning: #fdd663;
+
+  --bg: #202124;
+  --bg-subtle: #202124;
+  --surface: #292a2d;
+  --surface-2: #3c4043;
+  --surface-3: #44474b;
+  --surface-raised: #303134;
+  --backdrop: rgba(0, 0, 0, 0.6);
+
+  --stage-bg: #17181b;
+  --stage-tile: #303134;
+
+  --text: #e8eaed;
+  --text-secondary: #9aa0a6;
+  --text-tertiary: #80868b;
+
+  --border: #3c4043;
+  --border-strong: #5f6368;
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.28);
+  --shadow-2: 0 2px 6px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.32);
+  --shadow-3: 0 4px 12px rgba(0, 0, 0, 0.5), 0 16px 48px rgba(0, 0, 0, 0.4);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+
+    --accent: #aab4ff;
+    --accent-hover: #c3caff;
+    --accent-soft: rgba(170, 180, 255, 0.15);
+    --accent-contrast: #000a52;
+    --danger: #f28b82;
+    --danger-hover: #f6aea9;
+    --danger-soft: rgba(242, 139, 130, 0.15);
+    --danger-contrast: #202124;
+    --danger-text: #f28b82;
+    --success: #81c995;
+    --warning: #fdd663;
+
+    --bg: #202124;
+    --bg-subtle: #202124;
+    --surface: #292a2d;
+    --surface-2: #3c4043;
+    --surface-3: #44474b;
+    --surface-raised: #303134;
+    --backdrop: rgba(0, 0, 0, 0.6);
+
+    --stage-bg: #17181b;
+    --stage-tile: #303134;
+
+    --text: #e8eaed;
+    --text-secondary: #9aa0a6;
+    --text-tertiary: #80868b;
+
+    --border: #3c4043;
+    --border-strong: #5f6368;
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.28);
+    --shadow-2: 0 2px 6px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.32);
+    --shadow-3: 0 4px 12px rgba(0, 0, 0, 0.5), 0 16px 48px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* ---- Reset ---- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+.app {
+  height: 100%;
+  height: 100dvh;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+img,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    /* Without this an `infinite` animation keeps looping, just 100000x
+       faster — a jitter for exactly the reader who asked for less. */
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---- Shared primitives ---- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 24px;
+  height: 48px;
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+  font-size: 15px;
+  white-space: nowrap;
+  transition: background var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+  user-select: none;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* icon() emits SVGs with no width/height — unsized they collapse or blow up. */
+.btn svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  box-shadow: var(--shadow-1);
+}
+
+.btn-tonal {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.btn-tonal:hover {
+  background: var(--accent-soft);
+  filter: brightness(0.97);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--border);
+}
+
+.btn-outline:hover {
+  background: var(--accent-soft);
+}
+
+.btn-text {
+  background: transparent;
+  color: var(--accent);
+  padding: 0 16px;
+}
+
+.btn-text:hover {
+  background: var(--accent-soft);
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background: var(--danger-hover);
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  transition: background var(--dur-fast) var(--ease);
+  flex: none;
+}
+
+.icon-btn:hover {
+  background: var(--surface-2);
+}
+
+.icon-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.text-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+
+.text-field:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.text-field input {
+  border: none;
+  outline: none;
+  background: none;
+  flex: 1;
+  min-width: 0;
+  font-size: 15px;
+}
+
+.text-field input::placeholder {
+  /* Tertiary is 3.7:1 on white — short of legible for the one line that
+     says what the field is for. */
+  color: var(--text-secondary);
+}
+
+.text-field svg {
+  width: 20px;
+  height: 20px;
+  color: var(--text-secondary);
+  flex: none;
+}
+
+.select-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.select-field svg {
+  width: 18px;
+  height: 18px;
+  color: var(--text-secondary);
+  flex: none;
+}
+
+.select-field select {
+  flex: 1;
+  min-width: 0;
+  height: 40px;
+  padding: 0 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 500;
+  user-select: none;
+  flex: none;
+}
+
+/* ---- Toasts ---- */
+
+.toasts {
+  position: fixed;
+  left: 50%;
+  bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 1000;
+  pointer-events: none;
+  width: max-content;
+  max-width: min(90vw, 480px);
+  /* The meeting view raises this (inline) while a control-bar popover is
+     open, so notifications don't land on top of it. */
+}
+
+.toast {
+  background: var(--surface-raised);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-2);
+  padding: 12px 20px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: toast-in var(--dur) var(--ease);
+  /* Nothing in a toast is interactive, and they land over the control bar's
+     popovers — an emoji picker you can see but can't press is worse than
+     one that isn't covered at all. Let every click through. */
+  pointer-events: none;
+  max-width: 100%;
+}
+
+.toast svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  color: var(--accent);
+}
+
+.toast .toast-text {
+  /* A flex item will not shrink below its content: an 80-character pasted
+     link ran out of the toast and off a phone's screen. */
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* A toast that does something when pressed (chat previews open the chat). */
+.toast.clickable {
+  pointer-events: auto;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  border: 1px solid var(--border);
+  transition: background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+
+.toast.clickable:hover {
+  background: var(--surface-2);
+  transform: translateY(-1px);
+}
+
+.toast.clickable:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.toast.leaving {
+  animation: toast-out var(--dur) var(--ease) forwards;
+}
+
+/* Keep toasts above the two-row meeting control bar on small screens. */
+@media (max-width: 820px) {
+  .toasts {
+    bottom: calc(132px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes toast-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+/* ---- Scrollbars ---- */
+
+.scroll {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 4px;
+}

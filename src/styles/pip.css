@@ -1,0 +1,133 @@
+/* ---------------------------------------------------------------------------
+   Picture-in-picture
+
+   The rules under `.pip-window` style the floating window's own document.
+   It starts empty, so ui/pip.js copies every sheet on the page into it —
+   which is what lets a tile in there be the same `.tile` as on the stage.
+   --------------------------------------------------------------------------- */
+
+.pip-window {
+  /* Meeting-bar controls, shrunk to a window the size of a postcard. */
+  --control-size: 34px;
+
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--stage-bg);
+  color: var(--stage-text);
+}
+
+.pip-stage {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+}
+
+.pip-grid {
+  position: absolute;
+  inset: 6px;
+}
+
+/* Pinning belongs to the tab that owns the call — the floating window is
+   a monitor, not a control surface. */
+.pip-grid .tile-actions {
+  display: none;
+}
+
+.pip-grid .tile {
+  border-radius: 10px;
+}
+
+.pip-grid .tile-name {
+  left: 6px;
+  bottom: 6px;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  max-width: calc(100% - 12px);
+}
+
+.pip-grid .tile-name svg {
+  width: 13px;
+  height: 13px;
+}
+
+.pip-grid .tile-badges {
+  top: 6px;
+  right: 6px;
+  gap: 4px;
+}
+
+.pip-grid .tile-badge {
+  width: 22px;
+  height: 22px;
+}
+
+.pip-grid .tile-badge svg {
+  width: 13px;
+  height: 13px;
+}
+
+.pip-grid .tile-badge.reconnecting {
+  width: auto;
+  padding: 0 8px;
+  font-size: 10px;
+}
+
+.pip-grid .tile .avatar {
+  width: clamp(24px, 34%, 64px);
+  font-size: clamp(11px, 5vw, 24px);
+}
+
+/* How many participants didn't fit — without it the window quietly lies
+   about the size of the meeting. */
+.pip-count {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 4;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: rgba(13, 15, 26, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.pip-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+}
+
+.pip-bar .round-ctl svg {
+  width: 18px;
+  height: 18px;
+}
+
+.pip-bar .leave-btn {
+  width: 52px;
+}
+
+.pip-bar .leave-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Browsers without Document PiP float a single <video> instead. It has to
+   stay in the page for them to keep rendering it, so park it out of the
+   way rather than hiding it — `display: none` would stop the float. */
+.pip-source {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}

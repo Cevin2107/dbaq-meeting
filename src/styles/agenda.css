@@ -1,0 +1,497 @@
+/* ---------------------------------------------------------------------------
+   Home screen: "Your meetings" — the day's meetings from the Calendar app
+   --------------------------------------------------------------------------- */
+
+.home-agenda {
+  flex: none;
+  width: min(44vw, 460px);
+  min-width: 0;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.agenda {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+  max-height: min(640px, calc(100vh - 160px));
+}
+
+.agenda-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 16px 12px 8px 20px;
+}
+
+.agenda-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 0;
+}
+
+.agenda-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.agenda-subtitle {
+  color: var(--text-secondary);
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.agenda-nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: none;
+}
+
+.agenda-today {
+  height: 36px;
+  padding: 0 12px;
+  font-size: 14px;
+}
+
+.agenda-today:disabled {
+  opacity: 0.45;
+}
+
+.agenda-nav .icon-btn {
+  width: 36px;
+  height: 36px;
+}
+
+/* ---- Week strip ---- */
+
+.agenda-strip {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  padding: 0 12px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.agenda-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 0 4px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  transition: background var(--dur-fast) var(--ease);
+}
+
+.agenda-day:hover {
+  background: var(--surface-2);
+}
+
+.agenda-day:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.agenda-dow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.agenda-dom {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 15px;
+  color: var(--text);
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+
+.agenda-day.is-today .agenda-dow,
+.agenda-day.is-today .agenda-dom {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.agenda-day.is-selected .agenda-dom {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-weight: 500;
+}
+
+.agenda-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: transparent;
+}
+
+.agenda-day.has-meetings .agenda-dot {
+  background: var(--accent);
+}
+
+.agenda-day.is-selected.has-meetings .agenda-dot {
+  background: var(--text-secondary);
+}
+
+/* ---- The day's list ---- */
+
+.agenda-body {
+  flex: 1;
+  min-height: 132px;
+  overflow-y: auto;
+  padding: 12px 12px 4px;
+  scrollbar-width: thin;
+}
+
+.agenda-section + .agenda-section {
+  margin-top: 10px;
+}
+
+.agenda-section-title {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin: 4px 8px 6px;
+}
+
+.agenda-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.agenda-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 12px 12px 16px;
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+}
+
+.agenda-item.is-now {
+  background: var(--accent-soft);
+}
+
+.agenda-item.is-past {
+  background: transparent;
+  border: 1px dashed var(--border);
+}
+
+.agenda-item.is-past .agenda-item-main {
+  opacity: 0.7;
+}
+
+.agenda-item-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.agenda-item-time {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.agenda-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  padding: 0 7px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-3);
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+.agenda-badge.is-now {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+.agenda-item-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.agenda-item-meta {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.agenda-join {
+  height: 36px;
+  padding: 0 14px;
+  font-size: 14px;
+  flex: none;
+  text-decoration: none; /* the "Open link" action is an <a> */
+}
+
+.agenda-join svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ---- Empty, loading, error ---- */
+
+.agenda-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 8px 16px;
+}
+
+.agenda-empty-title {
+  font-size: 15px;
+  color: var(--text);
+  margin: 0;
+}
+
+.agenda-empty-hint {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 380px;
+}
+
+.agenda-open-calendar {
+  height: 40px;
+  padding: 0 18px;
+  font-size: 14px;
+}
+
+.agenda-next {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  padding: 10px 10px 10px 14px;
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  color: var(--text);
+  transition: background var(--dur-fast) var(--ease);
+}
+
+.agenda-next:hover {
+  background: var(--surface-3);
+}
+
+.agenda-next svg {
+  width: 20px;
+  height: 20px;
+  color: var(--text-secondary);
+  flex: none;
+  margin-left: auto;
+}
+
+.agenda-next-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  flex: none;
+}
+
+.agenda-next-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.agenda-next-when {
+  font-size: 12px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.agenda-next-title {
+  font-size: 14px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.agenda-item.is-skeleton {
+  pointer-events: none;
+}
+
+.agenda-item.is-skeleton .agenda-item-time,
+.agenda-item.is-skeleton .agenda-item-title,
+.agenda-item.is-skeleton .agenda-join {
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--surface-3) 25%, var(--surface-2) 50%, var(--surface-3) 75%);
+  background-size: 200% 100%;
+  animation: agenda-shimmer 1.4s linear infinite;
+}
+
+.agenda-item.is-skeleton .agenda-item-time {
+  height: 12px;
+  width: 38%;
+}
+
+.agenda-item.is-skeleton .agenda-item-title {
+  height: 16px;
+  width: 70%;
+  margin-top: 4px;
+}
+
+.agenda-item.is-skeleton .agenda-join {
+  width: 72px;
+  border-radius: var(--radius-pill);
+}
+
+@keyframes agenda-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* ---- Footer ---- */
+
+.agenda-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px 6px 20px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.agenda-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.agenda-source svg {
+  width: 16px;
+  height: 16px;
+}
+
+.agenda-status {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.agenda-refresh {
+  width: 32px;
+  height: 32px;
+}
+
+.agenda-refresh svg {
+  width: 18px;
+  height: 18px;
+}
+
+.agenda-refresh.is-spinning svg {
+  animation: agenda-spin 0.9s linear infinite;
+}
+
+@keyframes agenda-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* The hint shown in the illustration's place on the open web, where there is
+   no Calendar app to ask. */
+.home-art-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  max-width: 320px;
+  margin: 14px auto 0;
+  text-align: left;
+  color: var(--text-tertiary);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.home-art-hint svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  margin-top: 1px;
+}
+
+@media (max-width: 900px) {
+  .home-agenda {
+    width: 100%;
+    max-width: 560px;
+  }
+
+  .agenda {
+    max-height: none;
+  }
+
+  .agenda-body {
+    overflow: visible;
+  }
+}
+
+@media (max-width: 520px) {
+  .agenda-head {
+    padding: 12px 8px 6px 16px;
+  }
+
+  .agenda-subtitle {
+    display: none;
+  }
+
+  .agenda-item {
+    padding: 10px 10px 10px 14px;
+  }
+
+  .agenda-join {
+    padding: 0 12px;
+  }
+}
